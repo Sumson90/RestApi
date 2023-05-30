@@ -9,7 +9,7 @@ import java.util.Set;
 @With
 @Entity
 @Builder
-@ToString(of = {"name", "status"})
+@ToString(of = {"name", "status","category"})
 @EqualsAndHashCode(of = "petId")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +26,8 @@ public class PetEntity {
     private String name;
     @Column(name = "status")
     private String status;
+    @Column(name = "category")
+    private String category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")

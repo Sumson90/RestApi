@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 @With
@@ -34,7 +35,7 @@ public class EmployeeDto {
     private String phone;
     @Email
     private String email;
-//    @OneToMany(fetch = FetchType.EAGER,mappedBy = "employee")
-//    private Setter<PetEntity> pets;
+    private Set<PetDto> pets;
+
 
 }
