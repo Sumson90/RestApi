@@ -14,7 +14,7 @@ public class EntityFixture {
         return EmployeeEntity.builder()
                 .name("Agieniszka")
                 .surname("Example")
-                .salary(new BigDecimal("12345"))
+                .salary(new BigDecimal("12345.0").setScale(2))
                 .phone("+48 123 456 123")
                 .email("example@email.pl")
                 .build();
@@ -23,7 +23,7 @@ public class EntityFixture {
         return EmployeeEntity.builder()
                 .name("Tomek")
                 .surname("Ziomek")
-                .salary(new BigDecimal("77777"))
+                .salary(new BigDecimal("77777.0").setScale(2))
                 .phone("+48 123 456 123")
                 .email("example@email.pl")
                 .build();
@@ -32,7 +32,7 @@ public class EntityFixture {
         return EmployeeEntity.builder()
                 .name("Marek")
                 .surname("Kaminski")
-                .salary(new BigDecimal("12345"))
+                .salary(new BigDecimal("12345.0"))
                 .phone("+48 123 456 123")
                 .email("example@email.pl")
                 .build();

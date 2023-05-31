@@ -13,7 +13,7 @@ public class DtoFixtures {
         return EmployeeDto.builder()
                 .name("Agieniszka")
                 .surname("Example")
-                .salary(new BigDecimal("12345"))
+                .salary(new BigDecimal("12345.0").setScale(2))
                 .phone("+48 123 456 123")
                 .email("example@email.pl")
                 .build();
@@ -22,7 +22,7 @@ public class DtoFixtures {
         return EmployeeDto.builder()
                 .name("Tomek")
                 .surname("Ziomek")
-                .salary(new BigDecimal("77777"))
+                .salary(new BigDecimal("77777.0").setScale(2))
                 .phone("+48 123 456 123")
                 .email("example@email.pl")
                 .build();
@@ -31,7 +31,7 @@ public class DtoFixtures {
         return PetDto.builder()
                 .petId(1)
                 .petStorePetId(4L)
-                .name("lion")
+                .name("doggie")
                 .category("Dogs")
                 .build();
     }

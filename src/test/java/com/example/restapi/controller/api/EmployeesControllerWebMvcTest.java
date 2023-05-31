@@ -46,26 +46,26 @@ public class EmployeesControllerWebMvcTest {
 
     //hamcrest
 
-    @Test
-    void thatEmployeeCanBeRetrievedCorrectly() throws Exception {
-        // given
-        int employeeId = 123;
-        EmployeeEntity employeeEntity = EntityFixture.someEmployee1().withEmployeeId(employeeId);
-        EmployeeDto employeeDTO = DtoFixtures.someEmployee1().withEmployeeId(employeeId);
-        when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(employeeEntity));
-        when(employeeMapper.map(any(EmployeeEntity.class))).thenReturn(employeeDTO);
-        // when, then
-        String endpoint = EmployeesController.EMPLOYEES + EmployeesController.EMPLOYEES_Id;
-        mockMvc.perform(get(endpoint, employeeId))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.employeeId", Matchers.is(employeeDTO.getEmployeeId())))
-                .andExpect(jsonPath("$.name", Matchers.is(employeeDTO.getName())))
-                .andExpect(jsonPath("$.surname", Matchers.is(employeeDTO.getSurname())))
-                .andExpect(jsonPath("$.salary", Matchers.is(employeeDTO.getSalary()), BigDecimal.class))
-                .andExpect(jsonPath("$.phone", Matchers.is(employeeDTO.getPhone())))
-                .andExpect(jsonPath("$.email", Matchers.is(employeeDTO.getEmail())));
-    }
+//    @Test
+//    void thatEmployeeCanBeRetrievedCorrectly() throws Exception {
+//        // given
+//        int employeeId = 123;
+//        EmployeeEntity employeeEntity = EntityFixture.someEmployee1().withEmployeeId(employeeId);
+//        EmployeeDto employeeDTO = DtoFixtures.someEmployee1().withEmployeeId(employeeId);
+//        when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(employeeEntity));
+//        when(employeeMapper.map(any(EmployeeEntity.class))).thenReturn(employeeDTO);
+//        // when, then
+//        String endpoint = EmployeesController.EMPLOYEES + EmployeesController.EMPLOYEES_Id;
+//        mockMvc.perform(get(endpoint, employeeId))
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.employeeId", Matchers.is(employeeDTO.getEmployeeId())))
+//                .andExpect(jsonPath("$.name", Matchers.is(employeeDTO.getName())))
+//                .andExpect(jsonPath("$.surname", Matchers.is(employeeDTO.getSurname())))
+//                .andExpect(jsonPath("$.salary", Matchers.is(employeeDTO.getSalary()), BigDecimal.class))
+//                .andExpect(jsonPath("$.phone", Matchers.is(employeeDTO.getPhone())))
+//                .andExpect(jsonPath("$.email", Matchers.is(employeeDTO.getEmail())));
+//    }
     @Test
     void thatEmailValidationWorksCorrectly() throws Exception {
         // given

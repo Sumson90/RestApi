@@ -15,8 +15,6 @@ public class PetClientImpl implements PetDAO {
     @Override
     public Optional<Pet> getPet(final Long petId) {
         try {
-            final var available = petApi.findPetsByStatusWithHttpInfo("available").block()
-                    .getBody();
             return Optional.ofNullable(petApi.getPetById(petId).block())
                     .map(petMapper::map);
         } catch (Exception e) {
