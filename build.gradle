@@ -1,47 +1,53 @@
 plugins {
     id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version "${springBootDependencyManagementVersion}"
-    id 'org.openapi.generator' version "${openapiGeneratorVersion}"
+    id "org.openapi.generator" version "${openapiGeneratorVersion}"
     id 'java'
 }
-
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = "${sourceCompatibility}"
-
+sourceCompatibility = '17'
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
-
 repositories {
     mavenCentral()
 }
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.flywaydb:flyway-core'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
     runtimeOnly 'org.postgresql:postgresql'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    compileOnly 'org.projectlombok:lombok'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocOpenApiVersion}"
+    // Po wygenerowaniu klienta, trzeba będzie dodać poniższe zależności, żeby kod się kompilował
     implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
     implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+    implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
+    // warning: unknown enum constant When.MAYBE
+    // reason: class file for javax.annotation.meta.When not found
     implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
-    implementation 'io.swagger:swagger-annotations:1.6.2'
-    annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.projectlombok:lombok'
-    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    implementation "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Test
+    testRuntimeOnly 'com.h2database:h2'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+    testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
 }
 
 openApiGenerate {
@@ -72,4 +78,5 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
 
